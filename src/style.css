@@ -216,3 +216,15 @@ form .trigger-wrapper .toggle-visibility {
   border-radius: 10px;
   margin-top: 1rem;
 }
+
+.disclaimer{
+  background-color: var(--color-warning-95, hsl(25.110132158590307, 89.0196078431%, 95%));
+    border: 1px solid var(--color-warning, #f16d0e);
+    border-radius: var(--border-radius-6, 6px);
+    padding: 3%;
+    margin:2%;
+}
+
+.disclaimer ul li{
+  margin: 2.5%;
+}

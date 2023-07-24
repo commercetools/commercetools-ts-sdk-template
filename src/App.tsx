@@ -44,10 +44,10 @@ export default function App(): React.JSX.Element {
 
     setCredentials(
       (prevState) =>
-        ({
-          ...prevState,
-          [name]: value,
-        } as Pick<Credentials, keyof Credentials>)
+      ({
+        ...prevState,
+        [name]: value,
+      } as Pick<Credentials, keyof Credentials>)
     );
   }
 
@@ -89,16 +89,25 @@ export default function App(): React.JSX.Element {
 
   return (
     <div className="container">
-      <div className="title-text">Welcome to Typescript SDK Sandbox</div>
+      <div className="title-text">Welcome to the Typescript SDK Sandbox</div>
 
       <div className="subtitle-text">
-        Start editing sdk/request.ts file and see how your creativity can take
-        flight!
+        Edit sdk/request.ts and click "Execute request" to view the response.
       </div>
+
+      <div className="disclaimer">
+        <ul>
+          <li>This service is not hosted by commercetools.</li>
+          <li>Do not store API Client credentials in the files.</li>
+          <li>The sandbox is intended as a playground and not an actual environment.</li>
+          <li>API Client credentials entered in the below form are only used in the current session.</li>
+        </ul>
+      </div>
+
 
       <div className="form-title">
         <div className="form-instruction-text">
-          Enter client credentials to begin
+          Enter your API Client credentials:
         </div>
         <button
           type="button"
