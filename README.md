@@ -7,5 +7,6 @@ You can use this template to try out the TypeScript SDK to test code and feature
 Click on the button below to proceed
 
 <a href="https://stackblitz.com/fork/github/commercetools/commercetools-ts-sdk-template?file=sdk%2Frequest.ts" target="_blank">
-  <img src="./assets/images/stackblitz-icon-seeklogo.png"/>
+  <img src="./assets/images/stackblitz-icon-seeklogo.png" width="40px" 
+     height="50px"/>
 </a>
