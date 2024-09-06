@@ -144,7 +144,7 @@ form .trigger-wrapper .action-switcher-btn {
 }
 
 form .trigger-wrapper .toggle-visibility {
-  margin-left: 1rem;
+  margin-left: 0rem;
 }
 
 form .trigger-wrapper .toggle-visibility:hover {
@@ -159,6 +159,7 @@ form .trigger-wrapper .save-details-button {
   background-color: transparent;
   border: 1px solid #cccccc;
   border-radius: 7px;
+  margin-right: 1rem;
 
   cursor: pointer;
 }

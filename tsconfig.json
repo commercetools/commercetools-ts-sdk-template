@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "lib": ["es6", "dom"],
+    "outDir": "./dist/",
+    "jsx": "react",
+    "allowJs": true,
+    "strict": false,
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "noImplicitAny": false,
+    // "allowSyntheticDefaultImports": true
+  },
+  "include": ["src", "server.js"]
+}

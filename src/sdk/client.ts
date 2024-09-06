@@ -1,18 +1,15 @@
-// import fetch from 'node-fetch';
 import {
   ClientBuilder,
-  
+
   type Client,
   type AuthMiddlewareOptions,
   type HttpMiddlewareOptions
- } from '@commercetools/sdk-client-v2'
-
- const date = new Date().toISOString()
+} from '@commercetools/ts-client'
 
 // Configure httpMiddlewareOptions
 const httpMiddlewareOptions: HttpMiddlewareOptions = {
   host: 'https://api.europe-west1.gcp.commercetools.com',
-  fetch,
+  httpClient: fetch,
 };
 
 // Export the ClientBuilder
@@ -31,14 +28,14 @@ export function client(
       clientSecret: clientSecret,
     },
     // scopes: _scopes,
-    fetch,
+    httpClient: fetch,
   };
 
   return new ClientBuilder()
     .withProjectKey(projectKey)
     .withHttpMiddleware(httpMiddlewareOptions)
     .withClientCredentialsFlow(authMiddlewareOptions)
-    .withUserAgentMiddleware({ libraryName: `stackblitz-env-${date}-typescript-sdk-v2` })
+    .withUserAgentMiddleware({ libraryName: `stackblitz-env-${new Date().toISOString()}-typescript-sdk-v3` })
     // .withLoggerMiddleware()
     .build();
 }
