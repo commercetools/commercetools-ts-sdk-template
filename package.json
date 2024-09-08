@@ -1,12 +1,10 @@
 {
-  "name": "stackblitz-starters-qq8rke",
+  "name": "commercetools-ts-sdk-template",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@commercetools/platform-sdk": "^4.9.0",
-    "@commercetools/sdk-client-v2": "^2.2.0",
-    "@types/react": "18.2.7",
-    "@types/react-dom": "18.2.4",
+    "@commercetools/platform-sdk": "^7.13.0",
+    "@commercetools/ts-client": "^2.0.4",
     "encoding": "^0.1.0",
     "node-fetch": "2.6.7",
     "react": "18.2.0",
@@ -21,6 +19,20 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "@types/react": "18.2.7",
+    "@types/react-dom": "18.2.4",
     "react-scripts": "latest"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

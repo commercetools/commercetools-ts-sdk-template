@@ -1,11 +1,11 @@
 import { client } from './client';
 
 import {
-  ApiRoot,
+  ByProjectKeyRequestBuilder,
   createApiBuilderFromCtpClient,
 } from '@commercetools/platform-sdk';
 
-type Nullable<T> = T | null;
+type Nullable<T> = T | '';
 export type Credentials = {
   projectKey: Nullable<string>;
   clientID: Nullable<string>;
@@ -18,7 +18,7 @@ export default function({
   clientID,
   clientSecret,
   scopes,
-}: Credentials): ApiRoot {
+}: Credentials): ByProjectKeyRequestBuilder {
   return createApiBuilderFromCtpClient(
     client(projectKey, clientID, clientSecret, scopes)
   ).withProjectKey({ projectKey });
