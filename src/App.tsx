@@ -1,40 +1,72 @@
-import * as React from 'react';
+// Home.tsx
+// import React, { useEffect } from 'react';
 
-import toast, { Toaster } from 'react-hot-toast';
+// export default function Home() {
+//   const hack = () => {};
+//   useEffect(hack, [])
 
-import { request } from '../sdk/request';
-import { Credentials } from '../sdk/root';
+//   return (
+//     <section>
+//       <h1>This is the home page</h1>
+//       <p>Lorem Ipsum is simply dummy text of the printing
+//         and typesetting industry. Lorem Ipsum has been the
+//         industry's standard dummy text ever since the 1500s,
+//         when an unknown printer took a galley of type and
+//         scrambled it to make a type specimen book.
+//         It has survived not only five centuries, but also the leap into
+//         electronic typesetting, remaining essentially unchanged.
+//         It was popularised in the 1960s with the release of Letraset
+//         sheets containing Lorem Ipsum passages, and more recently with
+//         desktop publishing software like Aldus PageMaker
+//         including versions of Lorem Ipsum.</p>
+//     </section>
+//   )
+// }
+
+
+import React, { useEffect } from 'react';
+import toast from 'react-simple-toasts';
+
+import { request } from './sdk/request';
+import { Credentials } from './sdk/root';
 
 import './style.css';
+import 'react-simple-toasts/dist/theme/dark.css';
+import 'react-simple-toasts/dist/theme/failure.css';
 
 const initCredentials = {
-  projectKey: getItem('projectKey'),
-  clientID: getItem('clientID'),
-  clientSecret: getItem('clientSecret'),
-  scopes: getItem('scopes'),
+  projectKey: '',
+  clientID: '',
+  clientSecret: '',
+  scopes: ''
 };
 
-function getItem(key: string): string {
-  const _credentials = JSON.parse(localStorage.getItem('credentials'));
-  return (_credentials && _credentials[key]) || '';
-}
-
-function validate({ projectKey, clientID, clientSecret }): boolean {
-  const isEmpty = projectKey && clientID && clientSecret;
-
-  return isEmpty;
-}
-
-export default function App(): React.JSX.Element {
+export default function App() {
   const [data, setData] = React.useState<any>(null);
   const [credentials, setCredentials] =
     React.useState<Credentials>(initCredentials);
   const [toggleField, setToggleField] = React.useState('password');
   const [rotateChevron, setRotateChevron] = React.useState(true);
 
-  React.useEffect(() => {
-    request(credentials).then(setData);
-  }, []);
+  function getItem(key: string) {
+    const _credentials = JSON.parse(localStorage.getItem('credentials') as string);
+    // set state here
+    setCredentials(state => ({
+      ...state,
+      [key]: (_credentials && _credentials[key]) || ''
+    }));
+  }
+
+  function validate({ projectKey, clientID, clientSecret }: any): boolean {
+    const isEmpty = projectKey && clientID && clientSecret;
+
+    return isEmpty;
+  }
+
+  useEffect(function () {
+    if (!localStorage) return;
+    Object.keys(initCredentials).map(getItem)
+  }, [])
 
   // triggers
   async function handleChange(
@@ -60,15 +92,20 @@ export default function App(): React.JSX.Element {
     setData(data);
   }
 
-  async function saveToLocalStorage(): Promise<void> {
+  function saveToLocalStorage() {
     if (validate(credentials)) {
       localStorage.setItem('credentials', JSON.stringify(credentials));
-      toast.success('Credentials saved to local storage!');
+      toast('Credentials saved to local storage!', { theme: 'dark', position: 'top-center' });
 
       return;
     }
 
-    toast.error('Something went wrong!');
+    toast('Something went wrong!', { theme: 'failure', position: 'top-center' });
+  }
+
+  function removeFromLocalStorage() {
+    localStorage.removeItem('credentials');
+    toast('Credentials deleted from local storgage!', { theme: 'dark', position: 'top-center' });
   }
 
   function toggleFields(): void {
@@ -195,8 +232,17 @@ export default function App(): React.JSX.Element {
                 className="save-details-button"
                 onClick={saveToLocalStorage}
               >
-                Save details to local storage
+                Save credentials to local storage
               </button>
+
+              <button
+                type="button"
+                className="save-details-button"
+                onClick={removeFromLocalStorage}
+              >
+                Delete credentials from local storage
+              </button>
+
               <button
                 type="button"
                 className="toggle-visibility"
@@ -223,15 +269,13 @@ export default function App(): React.JSX.Element {
       <div className="response-header-text">
         <span>Response</span>
       </div>
-      <div className="res-wrapper">
-        {data && (
+      {data && (
+        <div className="res-wrapper">
           <div>
             <pre className="result">{JSON.stringify(data, null, 2)}</pre>
           </div>
-        )}
-      </div>
-
-      <Toaster />
+        </div>
+      )}
     </div>
   );
 }
