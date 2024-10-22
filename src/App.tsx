@@ -15,7 +15,7 @@ const initCredentials = {
 };
 
 function getItem(key: string): string {
-  const _credentials = JSON.parse(localStorage.getItem('credentials'));
+  const _credentials = JSON.parse(localStorage.getItem('credentials') as string);
   return (_credentials && _credentials[key]) || '';
 }
 
